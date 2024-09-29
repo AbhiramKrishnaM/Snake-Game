@@ -52,7 +52,7 @@
         <button
           v-if="!gameRunning"
           @click="startGame"
-          class="rounded-md p-2 bg-[#FEA55F] text-black"
+          class="rounded-md p-2 bg-[#FEA55F] text-black text-sm"
         >
           {{ buttonText }}
         </button>
