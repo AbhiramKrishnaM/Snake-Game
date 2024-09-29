@@ -10,6 +10,10 @@ export default defineConfig({
     strictPort: true,
   },
 
+  optimizeDeps: {
+    include: ["highlight.js", "highlight.js/lib/core"],
+  },
+
   resolve: {
     alias: {
       "@": "/src",
