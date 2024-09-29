@@ -118,12 +118,6 @@
           />
         </div>
       </div>
-
-      <button
-        class="absolute -bottom-36 right-0 rounded-md p-2 border border-white text-white mt-auto"
-      >
-        Skip
-      </button>
     </div>
   </div>
 </template>
