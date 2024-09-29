@@ -1,5 +1,5 @@
 <template>
-  <div class="relative p-5 rounded-lg bg-gray-900 text-white">
+  <div class="relative rounded-lg text-white">
     <!-- Buttons for toggling between Template, Script, and Style sections -->
     <div class="absolute top-2 left-2 flex space-x-2">
       <button
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Code block to display Vue.js code based on active section -->
-    <pre class="h-56 overflow-y-scroll mt-12 p-4 bg-gray-800 rounded-md">
+    <pre class="h-56 overflow-y-scroll mt-12 p-4 rounded-md">
         <code ref="codeBlock" :class="languageClass"></code>
       </pre>
   </div>
