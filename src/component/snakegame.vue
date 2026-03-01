@@ -3,57 +3,23 @@
     <div class="top-left-fill -z-10"></div>
     <div class="bottom-left-fill -z-10"></div>
 
-    <img
-      id="green-vector"
-      :src="Green"
-      alt="Background halo"
-      class="absolute left-7 -top-9 -z-10"
-    />
+    <img id="green-vector" :src="Green" alt="Background halo" class="absolute left-7 -top-9 -z-10" />
 
-    <img
-      :src="Blue"
-      alt="Background halo"
-      class="absolute -right-13 -bottom-11 -z-10"
-    />
+    <img :src="Blue" alt="Background halo" class="absolute -right-13 -bottom-11 -z-10" />
 
-    <img
-      :src="BoltTopLeft"
-      alt="Screw top left"
-      class="absolute top-0 left-0 ml-3 mt-3"
-    />
+    <img :src="BoltTopLeft" alt="Screw top left" class="absolute top-0 left-0 ml-3 mt-3" />
 
-    <img
-      :src="BoltTopRight"
-      alt="Screw top right"
-      class="absolute top-0 right-0 mr-3 mt-3"
-    />
+    <img :src="BoltTopRight" alt="Screw top right" class="absolute top-0 right-0 mr-3 mt-3" />
 
-    <img
-      :src="BoltDownLeft"
-      alt="Screw bottom left"
-      class="absolute bottom-0 left-0 ml-3 mb-3"
-    />
+    <img :src="BoltDownLeft" alt="Screw bottom left" class="absolute bottom-0 left-0 ml-3 mb-3" />
 
-    <img
-      :src="BoltDownRight"
-      alt="Screw bottom right"
-      class="absolute bottom-0 right-0 mr-3 mb-3"
-    />
+    <img :src="BoltDownRight" alt="Screw bottom right" class="absolute bottom-0 right-0 mr-3 mb-3" />
 
     <div class="m-6 relative max-w-[240px]">
-      <canvas
-        ref="gameBoard"
-        width="240"
-        height="406"
-        class="rounded-lg bg-theme-main-gradient"
-      ></canvas>
+      <canvas ref="gameBoard" width="240" height="406" class="rounded-lg bg-theme-main-gradient"></canvas>
 
       <div class="absolute top-3/4 left-0 w-full flex justify-center">
-        <button
-          v-if="!gameRunning"
-          @click="startGame"
-          class="rounded-md p-2 bg-[#FEA55F] text-black text-sm"
-        >
+        <button v-if="!gameRunning" @click="startGame" class="rounded-md p-2 bg-[#FEA55F] text-black text-sm">
           {{ buttonText }}
         </button>
       </div>
@@ -66,41 +32,29 @@
 
         <div id="keyboard-controls" class="grid grid-cols-3 gap-1 mt-4">
           <div></div>
-          <div
-            :class="{
-              'bg-[#FEA55F]': highlightedKey === 'UP',
-              'bg-[#010C15]': highlightedKey !== 'UP',
-            }"
-            class="rounded-lg min-h-7 flex items-center justify-center"
-          >
+          <div :class="{
+            'bg-[#FEA55F]': highlightedKey === 'UP',
+            'bg-[#010C15]': highlightedKey !== 'UP',
+          }" class="rounded-lg min-h-7 flex items-center justify-center">
             <img :src="Up" alt="Up arrow" />
           </div>
           <div></div>
-          <div
-            :class="{
-              'bg-[#FEA55F]': highlightedKey === 'LEFT',
-              'bg-[#010C15]': highlightedKey !== 'LEFT',
-            }"
-            class="rounded-lg min-h-7 flex items-center justify-center"
-          >
+          <div :class="{
+            'bg-[#FEA55F]': highlightedKey === 'LEFT',
+            'bg-[#010C15]': highlightedKey !== 'LEFT',
+          }" class="rounded-lg min-h-7 flex items-center justify-center">
             <img :src="Left" alt="Left arrow" />
           </div>
-          <div
-            :class="{
-              'bg-[#FEA55F]': highlightedKey === 'DOWN',
-              'bg-[#010C15]': highlightedKey !== 'DOWN',
-            }"
-            class="rounded-lg min-h-7 flex items-center justify-center"
-          >
+          <div :class="{
+            'bg-[#FEA55F]': highlightedKey === 'DOWN',
+            'bg-[#010C15]': highlightedKey !== 'DOWN',
+          }" class="rounded-lg min-h-7 flex items-center justify-center">
             <img :src="Down" alt="Down arrow" />
           </div>
-          <div
-            :class="{
-              'bg-[#FEA55F]': highlightedKey === 'RIGHT',
-              'bg-[#010C15]': highlightedKey !== 'RIGHT',
-            }"
-            class="rounded-lg min-h-7 flex items-center justify-center"
-          >
+          <div :class="{
+            'bg-[#FEA55F]': highlightedKey === 'RIGHT',
+            'bg-[#010C15]': highlightedKey !== 'RIGHT',
+          }" class="rounded-lg min-h-7 flex items-center justify-center">
             <img :src="Right" alt="Right arrow" />
           </div>
         </div>
@@ -110,12 +64,7 @@
         <p>// foot left</p>
 
         <div class="grid grid-cols-5 gap-1 mt-3">
-          <img
-            v-for="(food, index) in foodImages"
-            :key="index"
-            :src="food"
-            alt="Snake food"
-          />
+          <img v-for="(food, index) in foodImages" :key="index" :src="food" alt="Snake food" />
         </div>
       </div>
     </div>
@@ -123,9 +72,7 @@
 </template>
 
 <script setup>
-// vue
 import { ref, onMounted, computed } from "vue";
-// assets
 import Green from "~/vectors/Green.svg";
 import Blue from "~/vectors/Blue.svg";
 import BoltDownLeft from "~/icons/bolt-down-left.svg";
@@ -140,38 +87,32 @@ import Right from "~/icons/right.svg";
 import ActiveSnakeFood from "~/icons/active-snake-food.svg";
 import InActiveSnakeFood from "~/icons/inactive-snake-food.svg";
 
-// state
 const gameBoard = ref(null);
 const gameRunning = ref(false);
 const gameOver = ref(false);
-const buttonText = ref("start-game"); // Initially set to "start-game"
-const foodEatenCount = ref(0); // Track the number of foods eaten
-const highlightedKey = ref(""); // Track the highlighted arrow key
+const buttonText = ref("start-game");
+const foodEatenCount = ref(0);
+const highlightedKey = ref("");
 
-// game configuration
 const size = {
   width: 240,
   height: 406,
 };
-const unitSize = 14; // Updated unit size to 14px
+const unitSize = 14;
 const snakeColor = "#43D9AD";
 
-// game variables
 let running = false;
 let xVelocity = 0;
-let yVelocity = -unitSize; // Start moving upwards
-let foodX;
+let yVelocity = -unitSize;
 let foodY;
 let score = 0;
 let snake = [];
 let snakeFoodImage = new Image();
 let foodLoaded = false;
 
-// Speed control variables
 let frameCounter = 0;
-const speedFactor = 10; // Adjust this to control the snake's speed
+const speedFactor = 10;
 
-// Computed property to manage food images in the UI
 const foodImages = computed(() => {
   const images = [];
   for (let i = 0; i < 15; i++) {
@@ -181,12 +122,11 @@ const foodImages = computed(() => {
       images.push(ActiveSnakeFood);
     }
   }
-  return images.reverse(); // Reverse the array to start from the bottom right
+  return images.reverse();
 });
 
-// functions
 function startGame() {
-  resetGame(); // Ensure game is reset before starting
+  resetGame();
   loadGame();
 }
 
@@ -231,7 +171,7 @@ function nextAnimationFrame(ctx) {
       if (running) nextAnimationFrame(ctx);
       else {
         gameRunning.value = false;
-        buttonText.value = "retry"; // Change the button text to "retry"
+        buttonText.value = "retry";
       }
     });
   }
@@ -258,7 +198,7 @@ function drawFood(ctx) {
     snakeFoodImage.src = SnakeFoodImageSrc;
     snakeFoodImage.onload = () => {
       ctx.drawImage(snakeFoodImage, foodX, foodY, unitSize, unitSize);
-      foodLoaded = true; // Mark the food as loaded
+      foodLoaded = true;
     };
   } else {
     ctx.drawImage(snakeFoodImage, foodX, foodY, unitSize, unitSize);
@@ -270,9 +210,9 @@ function moveSnake() {
   snake.unshift(head);
 
   if (snake[0].x === foodX && snake[0].y === foodY) {
-    foodEatenCount.value++; // Increment food eaten count
+    foodEatenCount.value++;
     if (foodEatenCount.value >= 15) {
-      foodEatenCount.value = 0; // Reset the count after 15 foods
+      foodEatenCount.value = 0;
     }
     createFood();
   } else {
@@ -287,18 +227,14 @@ function drawSnake(ctx) {
     const x = snakePart.x;
     const y = snakePart.y;
 
-    // Calculate the opacity for the current segment
     const opacity = 1 - index / totalSegments;
 
-    // Set the color with the calculated opacity
     ctx.fillStyle = `rgba(67, 217, 173, ${opacity})`;
 
     if (index === 0) {
-      // Draw the head with a semicircle based on the direction
       ctx.beginPath();
 
       if (xVelocity > 0) {
-        // Moving right
         ctx.arc(
           x + unitSize / 2,
           y + unitSize / 2,
@@ -310,7 +246,6 @@ function drawSnake(ctx) {
         ctx.lineTo(x, y);
         ctx.lineTo(x, y + unitSize);
       } else if (xVelocity < 0) {
-        // Moving left
         ctx.arc(
           x + unitSize / 2,
           y + unitSize / 2,
@@ -322,7 +257,6 @@ function drawSnake(ctx) {
         ctx.lineTo(x + unitSize, y + unitSize);
         ctx.lineTo(x + unitSize, y);
       } else if (yVelocity < 0) {
-        // Moving up
         ctx.moveTo(x, y + unitSize);
         ctx.lineTo(x + unitSize, y + unitSize);
         ctx.arc(
@@ -333,7 +267,6 @@ function drawSnake(ctx) {
           2 * Math.PI
         );
       } else if (yVelocity > 0) {
-        // Moving down
         ctx.moveTo(x, y);
         ctx.lineTo(x + unitSize, y);
         ctx.arc(x + unitSize / 2, y, unitSize / 2, 0, Math.PI);
@@ -342,7 +275,6 @@ function drawSnake(ctx) {
       ctx.closePath();
       ctx.fill();
     } else {
-      // Draw the body segments as squares with fading opacity
       ctx.fillRect(x, y, unitSize, unitSize);
     }
   });
@@ -387,11 +319,9 @@ function changeDirection(event) {
     default:
       break;
   }
-
-  // Remove the highlight after a short delay
   setTimeout(() => {
     highlightedKey.value = "";
-  }, 200); // Highlight duration
+  }, 200);
 }
 
 function checkGameOver() {
@@ -417,16 +347,15 @@ function checkGameOver() {
 
 function resetGame() {
   score = 0;
-  foodEatenCount.value = 0; // Reset food count to restart the food images
+  foodEatenCount.value = 0;
   xVelocity = 0;
-  yVelocity = -unitSize; // Start moving upwards
+  yVelocity = -unitSize;
   initializeSnake();
-  createFood(); // Ensure food is created initially
+  createFood();
   gameRunning.value = false;
   gameOver.value = false;
 }
 
-// hook
 onMounted(() => {
   const ctx = gameBoard.value.getContext("2d");
   initializeSnake();
@@ -443,11 +372,9 @@ onMounted(() => {
   border: 1px solid;
   border-radius: 8px;
   border: 1px solid #0c1616;
-  background: linear-gradient(
-    150deg,
-    rgba(23, 85, 83, 0.7) 1.7%,
-    rgba(67, 217, 173, 0.09) 81.82%
-  );
+  background: linear-gradient(150deg,
+      rgba(23, 85, 83, 0.7) 1.7%,
+      rgba(67, 217, 173, 0.09) 81.82%);
   box-shadow: 0px 2px 0px 0px rgba(255, 255, 255, 0.3) inset;
   backdrop-filter: blur(32px);
 }

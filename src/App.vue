@@ -1,9 +1,6 @@
 <template>
-  <h1
-    class="w-screen h-screen bg-theme-main text-white-gradient-01 flex items-center justify-center"
-  >
+  <h1 class="w-screen h-screen bg-theme-main text-white-gradient-01 flex items-center justify-center">
     <SnakeGame />
-
     <CodeSnippet />
   </h1>
 </template>
